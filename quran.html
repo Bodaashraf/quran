@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ختمة قرآن - منصة تتبع ختمة القرآن الكريم الجماعية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Tahoma', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap');
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .quran-font {
+            font-family: 'Amiri', serif;
+        }
+
+        /* Glow effect on click */
+        .glow-effect {
+            animation: pulseGlow 1.5s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 5px rgba(16, 185, 129, 0.4), 0 0 10px rgba(16, 185, 129, 0.2);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.8), 0 0 30px rgba(52, 211, 153, 0.6);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-gray-900 dark:via-slate-900 dark:to-emerald-950 text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-300">
+
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-emerald-100 dark:border-emerald-900/50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/30 transform hover:rotate-6 transition duration-300">
+                    <i class="fa-solid fa-quran text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-black bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300 bg-clip-text text-transparent">ختمة قرآن</h1>
+                    <p class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold">منصة مباركة لجمع تلاوة القرآن الكريم</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()" id="themeToggleBtn" class="p-2.5 rounded-xl bg-emerald-100/70 dark:bg-gray-800 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-200 dark:hover:bg-gray-700 transition shadow-inner flex items-center gap-2 text-sm font-semibold" title="تغيير المظهر">
+                    <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                    <span class="hidden sm:inline" id="themeText">وضع داكن</span>
+                </button>
+
+                <!-- Admin Login Button -->
+                <button onclick="openAdminModal()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-sm shadow-md hover:shadow-lg hover:from-amber-600 hover:to-orange-600 transition flex items-center gap-2 transform active:scale-95">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>دخول كأدمن</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 text-white p-6 sm:p-10 mb-10 shadow-2xl">
+            <div class="absolute -left-10 -bottom-10 w-60 h-60 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute right-0 top-0 w-80 h-80 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-3xl">
+                <span class="px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-emerald-100 text-xs font-bold inline-block mb-4">
+                    <i class="fa-solid fa-star text-amber-300 ml-1"></i> تبرع بوقتك لتختمة القرآن الجماعية
+                </span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 quran-font leading-tight">اقرأ وارتقِ، فإن منزلتك عند آخر آية تقرؤها</h2>
+                <p class="text-emerald-100 text-sm sm:text-base leading-relaxed mb-6 font-medium">
+                    اختر جزءاً من الأجزاء أدناه، واكتب اسمك لتبدأ في تلاوته. تعاون معنا لختم القرآن الكريم كاملاً وتشاركوا الأجر والثواب العظيم.
+                </p>
+
+                <!-- Progress Bar Container -->
+                <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20">
+                    <div class="flex justify-between items-center mb-2 text-sm font-bold">
+                        <span>نسبة إنجاز الختمة</span>
+                        <span id="progressPercentage">0%</span>
+                    </div>
+                    <div class="w-full bg-black/20 h-3 rounded-full overflow-hidden p-0.5">
+                        <div id="progressBar" class="bg-gradient-to-r from-amber-300 to-yellow-400 h-full rounded-full transition-all duration-700 shadow-sm" style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-between items-center mt-2 text-xs text-emerald-100">
+                        <span id="completedCountText">0 من 30 جزءاً محجوزاً</span>
+                        <span id="khatmaStatusBadge" class="px-2 py-0.5 rounded bg-amber-400/30 text-amber-200 font-bold">جاري العمل</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 bg-white dark:bg-gray-800/80 p-4 rounded-2xl border border-emerald-100 dark:border-gray-700 shadow-sm">
+            <div class="relative w-full sm:w-80">
+                <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-emerald-500">
+                    <i class="fa-solid fa-search"></i>
+                </span>
+                <input type="text" id="searchInput" oninput="filterJuz()" placeholder="ابحث برقم الجزء أو اسم السورة أو القارئ..." class="w-full pr-10 pl-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
+            </div>
+
+            <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                <button onclick="setFilter('all')" id="filterAll" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white shadow-sm transition">الكل (30)</button>
+                <button onclick="setFilter('available')" id="filterAvailable" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-gray-600 transition">المتاحة</button>
+                <button onclick="setFilter('taken')" id="filterTaken" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-gray-600 transition">المحجوزة</button>
+            </div>
+        </div>
+
+        <div id="juzGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Populated dynamically via JS -->
+        </div>
+    </main>
+
+    <div id="claimModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-emerald-100 dark:border-gray-700 transform transition-all scale-95 opacity-0" id="claimModalContent">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="claimModalTitle" class="text-xl font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
+                    <i class="fa-solid fa-book-open"></i> حجز الجزء
+                </h3>
+                <button onclick="closeClaimModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-2 rounded-xl">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-6">
+                أنت على وشك اختيار <span id="modalJuzName" class="font-bold text-emerald-600 dark:text-emerald-400">الجزء الأول</span>. الرجاء إدخال اسمك الكريم لتأكيد الحجز:
+            </p>
+
+            <form id="claimForm" onsubmit="submitClaim(event)">
+                <div class="mb-4">
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">اسم المشارك أو الكنية:</label>
+                    <input type="text" id="participantName" required placeholder="مثال: أحمد محمد" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
+                </div>
+                
+                <div class="flex gap-3 mt-6">
+                    <button type="button" onclick="closeClaimModal()" class="flex-1 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-bold text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition">إلغاء</button>
+                    <button type="submit" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-sm shadow-lg hover:from-emerald-700 hover:to-teal-700 transition">تأكيد الحجز</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-amber-100 dark:border-gray-700 transform transition-all scale-95 opacity-0" id="adminModalContent">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-amber-600 dark:text-amber-400 flex items-center gap-2">
+                    <i class="fa-solid fa-lock"></i> تسجيل دخول الأدمن
+                </h3>
+                <button onclick="closeAdminModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-2 rounded-xl">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-6">
+                أدخل كلمة المرور الخاصة بالإدارة للتحكم في الختمة وتصفير الأجزاء (الكلمة الافتراضية: <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded text-amber-500 font-mono">admin123</code>):
+            </p>
+
+            <form onsubmit="handleAdminLogin(event)">
+                <div class="mb-4">
+                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">كلمة المرور:</label>
+                    <input type="password" id="adminPasswordInput" required placeholder="أدخل كلمة المرور..." class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                </div>
+                
+                <div class="flex gap-3 mt-6">
+                    <button type="button" onclick="closeAdminModal()" class="flex-1 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-bold text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition">إلغاء</button>
+                    <button type="submit" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-sm shadow-lg hover:from-amber-600 hover:to-orange-600 transition">دخول</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel Control Modal -->
+    <div id="adminPanelModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-amber-100 dark:border-gray-700 transform transition-all scale-95 opacity-0 max-h-[90vh] overflow-y-auto" id="adminPanelContent">
+            <div class="flex justify-between items-center mb-6 border-b pb-4 dark:border-gray-700">
+                <h3 class="text-xl font-bold text-amber-600 dark:text-amber-400 flex items-center gap-2">
+                    <i class="fa-solid fa-screwdriver-wrench"></i> لوحة تحكم الأدمن
+                </h3>
+                <button onclick="closeAdminPanel()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-2 rounded-xl">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-amber-50 dark:bg-amber-950/40 p-4 rounded-2xl border border-amber-200 dark:border-amber-900/50">
+                    <h4 class="font-bold text-amber-800 dark:text-amber-300 text-sm mb-1">إدارة الختمة الجماعية</h4>
+                    <p class="text-xs text-amber-700 dark:text-amber-400 mb-4">يمكنك تصفير جميع الأجزاء وحذف كافة الأسماء لبدء ختمة جديدة كلياً.</p>
+                    <button onclick="confirmResetKhatma()" class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow transition flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> تصفير جميع الأجزاء وبدء ختمة جديدة
+                    </button>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-200 text-sm mb-3">سجل المشاركين في الختمة الحالية</h4>
+                    <div id="adminParticipantsList" class="space-y-2 max-h-60 overflow-y-auto pr-1">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t dark:border-gray-700 flex justify-end">
+                <button onclick="closeAdminPanel()" class="px-5 py-2.5 rounded-xl bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold text-sm hover:bg-gray-300 dark:hover:bg-gray-600 transition">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Box -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-5 py-3.5 rounded-2xl shadow-2xl border border-gray-800 dark:border-gray-200 text-sm font-semibold">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toastMessage">تم الحجز بنجاح!</span>
+    </div>
+
+    <script>
+        const juzData = [
+            { id: 1, name: "الجزء الأول", start: "الفاتحة 1", end: "البقرة 141", surahs: "الفاتحة - البقرة" },
+            { id: 2, name: "الجزء الثاني", start: "البقرة 142", end: "البقرة 252", surahs: "البقرة" },
+            { id: 3, name: "الجزء الثالث", start: "البقرة 253", end: "آل عمران 92", surahs: "البقرة - آل عمران" },
+            { id: 4, name: "الجزء الرابع", start: "آل عمران 93", end: "النساء 23", surahs: "آل عمران - النساء" },
+            { id: 5, name: "الجزء الخامس", start: "النساء 24", end: "النساء 147", surahs: "النساء" },
+            { id: 6, name: "الجزء السادس", start: "النساء 148", end: "المائدة 81", surahs: "النساء - المائدة" },
+            { id: 7, name: "الجزء السابع", start: "المائدة 82", end: "الأنعام 110", surahs: "المائدة - الأنعام" },
+            { id: 8, name: "الجزء الثامن", start: "الأنعام 111", end: "الأعراف 87", surahs: "الأنعام - الأعراف" },
+            { id: 9, name: "الجزء التاسع", start: "الأعراف 88", end: "الأنفال 40", surahs: "الأعراف - الأنفال" },
+            { id: 10, name: "الجزء العاشر", start: "الأنفال 41", end: "التوبة 92", surahs: "الأنفال - التوبة" },
+            { id: 11, name: "الجزء الحادي عشر", start: "التوبة 93", end: "هود 5", surahs: "التوبة - هود" },
+            { id: 12, name: "الجزء الثاني عشر", start: "هود 6", end: "يوسف 52", surahs: "هود - يوسف" },
+            { id: 13, name: "الجزء الثالث عشر", start: "يوسف 53", end: "إبراهيم 52", surahs: "يوسف - إبراهيم - الحجر" },
+            { id: 14, name: "الجزء الرابع عشر", start: "الحجر 1", end: "النحل 128", surahs: "الحجر - النحل" },
+            { id: 15, name: "الجزء الخامس عشر", start: "الإسراء 1", end: "الكهف 74", surahs: "الإسراء - الكهف" },
+            { id: 16, name: "الجزء السادس عشر", start: "الكهف 75", end: "طه 135", surahs: "الكهف - مريم - طه" },
+            { id: 17, name: "الجزء السابع عشر", start: "الأنبياء 1", end: "الحج 78", surahs: "الأنبياء - الحج" },
+            { id: 18, name: "الجزء الثامن عشر", start: "المؤمنون 1", end: "الفرقان 20", surahs: "المؤمنون - النور - الفرقان" },
+            { id: 19, name: "الجزء التاسع عشر", start: "الفرقان 21", end: "النمل 55", surahs: "الفرقان - الشعراء - النمل" },
+            { id: 20, name: "الجزء العشرون", start: "النمل 56", end: "العنكبوت 45", surahs: "النمل - القصص - العنكبوت" },
+            { id: 21, name: "الجزء الحادي والعشرون", start: "العنكبوت 46", end: "الأحزاب 30", surahs: "العنكبوت - الروم - لقمان - السجدة - الأحزاب" },
+            { id: 22, name: "الجزء الثاني والعشرون", start: "الأحزاب 31", end: "يس 27", surahs: "الأحزاب - سبأ - فاطر - يس" },
+            { id: 23, name: "الجزء الثالث والعشرون", start: "يس 28", end: "الزمر 31", surahs: "يس - الصافات - ص - الزمر" },
+            { id: 24, name: "الجزء الرابع والعشرون", start: "الزمر 32", end: "فصلت 46", surahs: "الزمر - غافر - فصلت" },
+            { id: 25, name: "الجزء الخامس والعشرون", start: "فصلت 47", end: "الجاثية 37", surahs: "فصلت - الشورى - الزخرف - الدخان - الجاثية" },
+            { id: 26, name: "الجزء السادس والعشرون", start: "الأحقاف 1", end: "الذاريات 30", surahs: "الأحقاف - محمد - الفتح - الحجرات - ق - الذاريات" },
+            { id: 27, name: "الجزء السابع والعشرون", start: "الذاريات 31", end: "الحديد 29", surahs: "الذاريات - الطور - النجم - القمر - الرحمن - الواقعة - الحديد" },
+            { id: 28, name: "الجزء الثامن والعشرون", start: "المجادلة 1", end: "التحريم 12", surahs: "المجادلة - الحشر - الممتحنة - الصف - الجمعة - المنافقون - التغابن - الطلاق - التحريم" },
+            { id: 29, name: "الجزء التاسع والعشرون", start: "الملك 1", end: "المرسلات 50", surahs: "الملك - القلم - الحاقة - المعارج - نوح - الجن - المزمل - المدثر - القيامة - الإنسان - المرسلات" },
+            { id: 30, name: "الجزء الثلاثون", start: "النبأ 1", end: "الناس 6", surahs: "النبأ - النازعات - عبس - التكوير - الانفطار - المطففين - الانشقاق - البروج - الطارق - الأعلى - الغاشية - الفجر - البلد - الشمس - الليل - الضحى - الشرح - التين - العلق - القدر - البينة - الزلزلة - العاديات - القارعة - التكاثر - العصر - الهمزة - الفيل - قريش - الماعون - الكوثر - الكافرون - النصر - المسد - الإخلاص - الفلق - الناس" }
+        ];
+
+        let khatmaState = JSON.parse(localStorage.getItem('quran_khatma_state')) || {};
+        let currentFilter = 'all';
+        let selectedJuzId = null;
+
+        // Theme management
+        function toggleTheme() {
+            const htmlEl = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            if (htmlEl.classList.contains('dark')) {
+                htmlEl.classList.remove('dark');
+                localStorage.setItem('quran_theme', 'light');
+                themeIcon.className = "fa-solid fa-moon text-lg";
+                themeText.innerText = "وضع داكن";
+            } else {
+                htmlEl.classList.add('dark');
+                localStorage.setItem('quran_theme', 'dark');
+                themeIcon.className = "fa-solid fa-sun text-lg text-amber-300";
+                themeText.innerText = "وضع فاتح";
+            }
+        }
+
+        // Initialize Theme on load
+        if (localStorage.getItem('quran_theme') === 'dark' || (!localStorage.getItem('quran_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('themeIcon').className = "fa-solid fa-sun text-lg text-amber-300";
+            document.getElementById('themeText').innerText = "وضع فاتح";
+        }
+
+        function renderJuzGrid(filterQuery = '') {
+            const grid = document.getElementById('juzGrid');
+            grid.innerHTML = '';
+
+            let completedCount = 0;
+
+            const filteredData = juzData.filter(juz => {
+                const state = khatmaState[juz.id];
+                const isTaken = state && state.taken;
+                
+                // Filter by status tab
+                if (currentFilter === 'available' && isTaken) return false;
+                if (currentFilter === 'taken' && !isTaken) return false;
+
+                // Filter by search text
+                if (filterQuery) {
+                    const q = filterQuery.toLowerCase();
+                    const matchName = juz.name.toLowerCase().includes(q);
+                    const matchSurahs = juz.surahs.toLowerCase().includes(q);
+                    const matchId = juz.id.toString() === q;
+                    const matchPerson = isTaken && state.name.toLowerCase().includes(q);
+                    if (!matchName && !matchSurahs && !matchId && !matchPerson) return false;
+                }
+                return true;
+            });
+
+            if (filteredData.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-gray-500 dark:text-gray-400">
+                        <i class="fa-solid fa-folder-open text-4xl mb-3 text-emerald-500"></i>
+                        <p class="font-bold text-base">لا توجد نتائج مطابقة لبحثك</p>
+                    </div>
+                `;
+            }
+
+            juzData.forEach(juz => {
+                if (khatmaState[juz.id] && khatmaState[juz.id].taken) {
+                    completedCount++;
+                }
+            });
+
+            // Update progress bar
+            const percentage = Math.round((completedCount / 30) * 100);
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressPercentage').innerText = percentage + '%';
+            document.getElementById('completedCountText').innerText = `${completedCount} من 30 جزءاً محجوزاً`;
+            
+            const statusBadge = document.getElementById('khatmaStatusBadge');
+            if (completedCount === 30) {
+                statusBadge.innerText = "اكتملت الختمة بفضل الله!";
+                statusBadge.className = "px-2 py-0.5 rounded bg-emerald-500 text-white font-bold animate-bounce";
+            } else {
+                statusBadge.innerText = "جاري العمل";
+                statusBadge.className = "px-2 py-0.5 rounded bg-amber-400/30 text-amber-200 font-bold";
+            }
+
+            filteredData.forEach(juz => {
+                const state = khatmaState[juz.id];
+                const isTaken = state && state.taken;
+
+                const card = document.createElement('div');
+                card.className = `rounded-3xl p-6 transition-all duration-300 border relative overflow-hidden flex flex-col justify-between ${
+                    isTaken 
+                    ? 'bg-emerald-50/60 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-900 shadow-sm' 
+                    : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl hover:-translate-y-1'
+                }`;
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-2xl ${isTaken ? 'bg-emerald-600 text-white' : 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400'} flex items-center justify-center font-black text-lg shadow-inner">
+                                    ${juz.id}
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-black text-gray-800 dark:text-gray-100">${juz.name}</h3>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 quran-font font-bold">${juz.surahs}</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold ${
+                                isTaken 
+                                ? 'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300' 
+                                : 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300'
+                            }">
+                                ${isTaken ? '<i class="fa-solid fa-check ml-1"></i> محجوز' : '<i class="fa-solid fa-circle-dot ml-1"></i> متاح'}
+                            </span>
+                        </div>
+
+                        <div class="space-y-1.5 mb-6 text-xs bg-gray-50 dark:bg-gray-900/50 p-3 rounded-2xl border border-gray-100 dark:border-gray-800">
+                            <div class="flex justify-between text-gray-600 dark:text-gray-400">
+                                <span>البداية:</span>
+                                <span class="font-semibold text-gray-800 dark:text-gray-200">${juz.start}</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600 dark:text-gray-400">
+                                <span>النهاية:</span>
+                                <span class="font-semibold text-gray-800 dark:text-gray-200">${juz.end}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        ${isTaken ? `
+                            <div class="flex items-center justify-between bg-white dark:bg-gray-800 p-3 rounded-2xl border border-emerald-100 dark:border-gray-700">
+                                <div class="flex items-center gap-2 overflow-hidden">
+                                    <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                    <span class="text-xs font-bold text-gray-700 dark:text-gray-200 truncate" title="${state.name}">${state.name}</span>
+                                </div>
+                                <button onclick="releaseJuz(${juz.id})" class="text-red-500 hover:text-red-700 text-xs font-bold px-2.5 py-1 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/40 transition" title="إلغاء الحجز">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        ` : `
+                            <button onclick="openClaimModal(${juz.id})" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-xs shadow-md hover:from-emerald-700 hover:to-teal-700 transition flex items-center justify-center gap-2 transform active:scale-95">
+                                <i class="fa-solid fa-book-bookmark"></i> اختيار وقراءة هذا الجزء
+                            </button>
+                        `}
+                    </div>
+                `;
+
+                // Interactive glow animation on click
+                card.addEventListener('click', (e) => {
+                    if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'I') {
+                        card.classList.add('glow-effect');
+                        setTimeout(() => card.classList.remove('glow-effect'), 1500);
+                    }
+                });
+
+                grid.appendChild(card);
+            });
+        }
+
+        function setFilter(type) {
+            currentFilter = type;
+            ['filterAll', 'filterAvailable', 'filterTaken'].forEach(id => {
+                const btn = document.getElementById(id);
+                btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-gray-600 transition";
+            });
+
+            const activeBtn = document.getElementById(type === 'all' ? 'filterAll' : type === 'available' ? 'filterAvailable' : 'filterTaken');
+            activeBtn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white shadow-sm transition";
+
+            renderJuzGrid(document.getElementById('searchInput').value);
+        }
+
+        function filterJuz() {
+            const query = document.getElementById('searchInput').value;
+            renderJuzGrid(query);
+        }
+
+        function openClaimModal(juzId) {
+            selectedJuzId = juzId;
+            const juz = juzData.find(j => j.id === juzId);
+            document.getElementById('modalJuzName').innerText = juz.name;
+            document.getElementById('participantName').value = '';
+
+            const modal = document.getElementById('claimModal');
+            const content = document.getElementById('claimModalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeClaimModal() {
+            const modal = document.getElementById('claimModal');
+            const content = document.getElementById('claimModalContent');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        function submitClaim(e) {
+            e.preventDefault();
+            const name = document.getElementById('participantName').value.trim();
+            if (!name) return;
+
+            khatmaState[selectedJuzId] = {
+                taken: true,
+                name: name,
+                date: new Date().toLocaleDateString('ar-EG')
+            };
+
+            localStorage.setItem('quran_khatma_state', JSON.stringify(khatmaState));
+            closeClaimModal();
+            renderJuzGrid(document.getElementById('searchInput').value);
+            showToast(`تم حجز الجزء بنجاح باسم: ${name}`, 'success');
+        }
+
+        function releaseJuz(juzId) {
+            if (confirm('هل أنت متأكد من إلغاء حجز هذا الجزء؟')) {
+                delete khatmaState[juzId];
+                localStorage.setItem('quran_khatma_state', JSON.stringify(khatmaState));
+                renderJuzGrid(document.getElementById('searchInput').value);
+                showToast('تم إلغاء حجز الجزء بنجاح', 'info');
+            }
+        }
+
+        function openAdminModal() {
+            document.getElementById('adminPasswordInput').value = '';
+            const modal = document.getElementById('adminModal');
+            const content = document.getElementById('adminModalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeAdminModal() {
+            const modal = document.getElementById('adminModal');
+            const content = document.getElementById('adminModalContent');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('adminPasswordInput').value;
+            if (pass === 'admin123' || pass === 'قرآن2026') {
+                closeAdminModal();
+                openAdminPanel();
+                showToast('مرحباً بك يا أدمن في لوحة التحكم', 'success');
+            } else {
+                showToast('كلمة المرور غير صحيحة!', 'error');
+            }
+        }
+
+        function openAdminPanel() {
+            updateAdminParticipantsList();
+            const modal = document.getElementById('adminPanelModal');
+            const content = document.getElementById('adminPanelContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeAdminPanel() {
+            const modal = document.getElementById('adminPanelModal');
+            const content = document.getElementById('adminPanelContent');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        function updateAdminParticipantsList() {
+            const listEl = document.getElementById('adminParticipantsList');
+            listEl.innerHTML = '';
+
+            const takenJuzs = Object.keys(khatmaState).filter(id => khatmaState[id].taken);
+
+            if (takenJuzs.length === 0) {
+                listEl.innerHTML = '<p class="text-xs text-gray-500 dark:text-gray-400 text-center py-4">لا توجد أجزاء محجوزة حتى الآن.</p>';
+                return;
+            }
+
+            takenJuzs.forEach(id => {
+                const item = khatmaState[id];
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-xs";
+                div.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-amber-600 dark:text-amber-400">الجزء ${id}</span>
+                        <span class="text-gray-600 dark:text-gray-300 font-semibold">(${item.name})</span>
+                    </div>
+                    <button onclick="releaseJuzFromAdmin(${id})" class="text-red-500 hover:text-red-700 font-bold px-2 py-1 rounded hover:bg-red-50 dark:hover:bg-red-950/50 transition">
+                        إلغاء الحجز
+                    </button>
+                `;
+                listEl.appendChild(div);
+            });
+        }
+
+        function releaseJuzFromAdmin(id) {
+            delete khatmaState[id];
+            localStorage.setItem('quran_khatma_state', JSON.stringify(khatmaState));
+            updateAdminParticipantsList();
+            renderJuzGrid(document.getElementById('searchInput').value);
+            showToast('تم إلغاء الحجز بنجاح', 'info');
+        }
+
+        function confirmResetKhatma() {
+            if (confirm('تحذير: هل أنت متأكد تماماً من تصفير جميع الأجزاء وحذف جميع الأسماء لبدء ختمة جديدة؟')) {
+                khatmaState = {};
+                localStorage.removeItem('quran_khatma_state');
+                updateAdminParticipantsList();
+                renderJuzGrid();
+                closeAdminPanel();
+                showToast('تم تصفير الختمة وبدء ختمة جديدة مباركة بنجاح!', 'success');
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toastNotification');
+            const msgEl = document.getElementById('toastMessage');
+            const iconEl = document.getElementById('toastIcon');
+
+            msgEl.innerText = message;
+            if (type === 'success') {
+                iconClient = "fa-solid fa-circle-check text-emerald-400 text-lg";
+                iconEl.className = "fa-solid fa-circle-check text-emerald-400 text-lg";
+            } else if (type === 'error') {
+                iconEl.className = "fa-solid fa-circle-xmark text-red-400 text-lg";
+            } else {
+                iconEl.className = "fa-solid fa-circle-info text-cyan-400 text-lg";
+            }
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+
+        window.onload = function() {
+            renderJuzGrid();
+        };
+    </script>
+</body>
+</html>
